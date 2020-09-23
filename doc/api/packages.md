@@ -364,7 +364,7 @@ For example, a package that wants to provide different ES module exports for
 Node.js supports the following conditions out of the box:
 
 * `"import"` - matched when the package is loaded via `import` or
-   `import()`, or via any top-level load or resolve operation by the
+   `import()`, or via any top-level import or resolve operation by the
    ECMAScript module loader. Applies regardless of the module format of the
    target file. _Always mutually exclusive with `"require"`._
 * `"require"` - matched when the package is loaded via `require()`.
