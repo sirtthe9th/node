@@ -368,9 +368,10 @@ Node.js supports the following conditions out of the box:
    ECMAScript module loader. Applies regardless of the module format of the
    target file. _Always mutually exclusive with `"require"`._
 * `"require"` - matched when the package is loaded via `require()`.
-   As `require()` only supports CommonJS, the referenced file should be
-   CommonJS, although the condition will be matched regardless of the module
-   format of the target file. _Always mutually exclusive with `"import"`._
+   The referenced file should be loadable with `require()` although the condition
+   will be matched regardless of the module format of the target file. Expected formats
+   include CommonJS, JSON, and native addons but not ES modules as `require()`
+   doesn't support them. _Always mutually exclusive with `"import"`._
 * `"node"` - matched for any Node.js environment. Can be a CommonJS or ES
    module file. _This condition should always come after `"import"` or
    `"require"`._
