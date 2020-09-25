@@ -2,13 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include "src/init/v8.h"
+#include "test/common/wasm/wasm-interpreter.h"
+#include "test/common/wasm/wasm-macro-gen.h"
 #include "test/unittests/test-utils.h"
 #include "testing/gmock/include/gmock/gmock.h"
-
-#include "src/init/v8.h"
-#include "src/wasm/wasm-interpreter.h"
-
-#include "test/common/wasm/wasm-macro-gen.h"
 
 using testing::MakeMatcher;
 using testing::Matcher;
@@ -205,7 +203,7 @@ TEST_F(ControlTransferTest, IfBrElse) {
       kExprElse,      // @6
       kExprEnd        // @7
   };
-  CheckTransfers(code, {{2, 5, 0, 0}, {4, 4, 0, 0}, {6, 2, 0, 0}});
+  CheckTransfers(code, {{2, 5, 0, 0}, {4, 4, 0, 0}});
 }
 
 TEST_F(ControlTransferTest, IfElseBr) {

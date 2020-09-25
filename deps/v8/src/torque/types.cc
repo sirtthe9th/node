@@ -74,10 +74,7 @@ std::string Type::SimpleName() const {
 std::string Type::HandlifiedCppTypeName() const {
   if (IsSubtypeOf(TypeOracle::GetSmiType())) return "int";
   if (IsSubtypeOf(TypeOracle::GetTaggedType())) {
-    base::Optional<const ClassType*> class_type = ClassSupertype();
-    std::string type =
-        class_type ? (*class_type)->GetGeneratedTNodeTypeName() : "Object";
-    return "Handle<" + type + ">";
+    return "Handle<" + ConstexprVersion()->GetGeneratedTypeName() + ">";
   } else {
     return ConstexprVersion()->GetGeneratedTypeName();
   }
@@ -909,6 +906,13 @@ TypeVector LowerParameterTypes(const ParameterTypes& parameter_types,
 VisitResult VisitResult::NeverResult() {
   VisitResult result;
   result.type_ = TypeOracle::GetNeverType();
+  return result;
+}
+
+VisitResult VisitResult::TopTypeResult(std::string top_reason,
+                                       const Type* from_type) {
+  VisitResult result;
+  result.type_ = TypeOracle::GetTopType(std::move(top_reason), from_type);
   return result;
 }
 

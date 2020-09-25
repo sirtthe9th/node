@@ -156,6 +156,12 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64F64x2Le:
     case kArm64F64x2Qfma:
     case kArm64F64x2Qfms:
+    case kArm64F64x2Pmin:
+    case kArm64F64x2Pmax:
+    case kArm64F64x2RoundUp:
+    case kArm64F64x2RoundDown:
+    case kArm64F64x2RoundTruncate:
+    case kArm64F64x2RoundTiesEven:
     case kArm64F32x4Splat:
     case kArm64F32x4ExtractLane:
     case kArm64F32x4ReplaceLane:
@@ -179,6 +185,12 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64F32x4Le:
     case kArm64F32x4Qfma:
     case kArm64F32x4Qfms:
+    case kArm64F32x4Pmin:
+    case kArm64F32x4Pmax:
+    case kArm64F32x4RoundUp:
+    case kArm64F32x4RoundDown:
+    case kArm64F32x4RoundTruncate:
+    case kArm64F32x4RoundTiesEven:
     case kArm64I64x2Splat:
     case kArm64I64x2ExtractLane:
     case kArm64I64x2ReplaceLane:
@@ -226,6 +238,7 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64I32x4GeU:
     case kArm64I32x4Abs:
     case kArm64I32x4BitMask:
+    case kArm64I32x4DotI16x8S:
     case kArm64I16x8Splat:
     case kArm64I16x8ExtractLaneU:
     case kArm64I16x8ExtractLaneS:
@@ -295,6 +308,7 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64I8x16RoundingAverageU:
     case kArm64I8x16Abs:
     case kArm64I8x16BitMask:
+    case kArm64S128Const:
     case kArm64S128Zero:
     case kArm64S128Dup:
     case kArm64S128And:
@@ -331,14 +345,11 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64S8x8Reverse:
     case kArm64S8x4Reverse:
     case kArm64S8x2Reverse:
-    case kArm64S1x2AnyTrue:
-    case kArm64S1x2AllTrue:
-    case kArm64S1x4AnyTrue:
-    case kArm64S1x4AllTrue:
-    case kArm64S1x8AnyTrue:
-    case kArm64S1x8AllTrue:
-    case kArm64S1x16AnyTrue:
-    case kArm64S1x16AllTrue:
+    case kArm64V128AnyTrue:
+    case kArm64V64x2AllTrue:
+    case kArm64V32x4AllTrue:
+    case kArm64V16x8AllTrue:
+    case kArm64V8x16AllTrue:
     case kArm64TestAndBranch32:
     case kArm64TestAndBranch:
     case kArm64CompareAndBranch32:
@@ -359,16 +370,15 @@ int InstructionScheduler::GetTargetInstructionFlags(
     case kArm64LdrDecompressTaggedPointer:
     case kArm64LdrDecompressAnyTagged:
     case kArm64Peek:
-    case kArm64S8x16LoadSplat:
-    case kArm64S16x8LoadSplat:
-    case kArm64S32x4LoadSplat:
-    case kArm64S64x2LoadSplat:
+    case kArm64LoadSplat:
     case kArm64I16x8Load8x8S:
     case kArm64I16x8Load8x8U:
     case kArm64I32x4Load16x4S:
     case kArm64I32x4Load16x4U:
     case kArm64I64x2Load32x2S:
     case kArm64I64x2Load32x2U:
+    case kArm64S128LoadMem32Zero:
+    case kArm64S128LoadMem64Zero:
       return kIsLoadOperation;
 
     case kArm64Claim:
